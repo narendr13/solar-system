@@ -23,5 +23,10 @@ pipeline{
                 sh 'npm test || true'
             }
         }
+        stage('code coverage'){
+            steps{
+                sh 'npm run coverage'
+            }
+        }
     }
 }
