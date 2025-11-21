@@ -26,7 +26,6 @@ pipeline{
                     steps {
                         dependencyCheck additionalArguments: '--scan . --format ALL --out ./ --prettyPrint --disableYarnAudit', odcInstallation: 'dependency-check'
                         dependencyCheckPublisher failedTotalCritical: 50, pattern: 'dependency-check-report.xml', skipNoReportFiles: true, stopBuild: true
-                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: './', reportFiles: 'dependency-check-report.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
 
                     }
                 }
