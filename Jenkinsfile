@@ -24,10 +24,7 @@ pipeline{
                 }
                 stage('dependency scanning using OWASP'){
                     steps {
-                        dependencyCheck additionalArguments: '''--scan \\\'./\\\'
-                            --format	\\\'ALL\\\'
-                            --out  \\\'./\\\'
-                            --prettyPrint''', odcInstallation: 'dependency-check'
+                        dependencyCheck additionalArguments: '--scan . --format ALL --out ./ --prettyPrint', odcInstallation: 'dependency-check'
                     }
                 }
             }
