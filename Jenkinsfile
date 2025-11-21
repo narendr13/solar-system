@@ -4,7 +4,7 @@ pipeline{
         nodejs 'nodejs-25-1-0'
     }
     environment {
-        MONGO_URI='mongodb://172.31.76.116:27017'
+        MONGO_URI='mongodb://172.31.76.116:27017/solar-system'
         MONGO_USER='myuser'
         MONGO_PSWD='mypassword'
     }
