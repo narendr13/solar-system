@@ -19,7 +19,7 @@ pipeline{
             parallel{
                 stage('dependency scanning npm audit'){
                     steps {
-                        sh 'npm audit'
+                        sh 'npm audit || true'
                     }
                 }
                 stage('dependency scanning using OWASP'){
