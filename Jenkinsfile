@@ -15,18 +15,20 @@ pipeline{
                 sh 'npm install'
             }
         }
-        parallel{
-            stage('dependency scanning npm audit'){
-                steps {
-                    sh 'npm audit'
+        stage('dependencies scanning'){
+            parallel{
+                stage('dependency scanning npm audit'){
+                    steps {
+                        sh 'npm audit'
+                    }
                 }
-            }
-            stage('dependency scanning using OWASP'){
-                steps {
-                    dependencyCheck additionalArguments: '''--scan \\\'./\\\'
-                        --format	\\\'ALL\\\'
-                        --out  \\\'./\\\'
-                        --prettyPrint''', odcInstallation: 'dependency-check'
+                stage('dependency scanning using OWASP'){
+                    steps {
+                        dependencyCheck additionalArguments: '''--scan \\\'./\\\'
+                            --format	\\\'ALL\\\'
+                            --out  \\\'./\\\'
+                            --prettyPrint''', odcInstallation: 'dependency-check'
+                    }
                 }
             }
         }
