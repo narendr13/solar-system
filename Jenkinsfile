@@ -19,12 +19,15 @@ pipeline{
             parallel{
                 stage('dependency scanning npm audit'){
                     steps {
-                        sh 'npm audit'
+                        sh 'npm audit --audit-level=critical'
                     }
                 }
                 stage('dependency scanning using OWASP'){
                     steps {
-                        dependencyCheck additionalArguments: '--scan . --format ALL --out ./ --prettyPrint', odcInstallation: 'dependency-check'
+                        dependencyCheck additionalArguments: '--scan . --format ALL --out ./ --prettyPrint --disableYarnAudit', odcInstallation: 'dependency-check'
+                        dependencyCheckPublisher failedTotalCritical: 1, pattern: 'dependency-check-report.xml', skipNoReportFiles: true, stopBuild: true
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: './', reportFiles: 'dependency-check-report.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+
                     }
                 }
             }
