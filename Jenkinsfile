@@ -5,8 +5,8 @@ pipeline{
     }
     environment {
         MONGO_URI = "mongodb://172.31.76.116:27017/solar-system"
-        MONGO_USER = "myuser"
-        MONGO_PSWD = "mypassword"
+        MONGO_USER = credentials('DB_USERNAME')
+        MONGO_PSWD = credentials('DB_PSWD')
     }
 
     stages {
@@ -27,6 +27,9 @@ pipeline{
                         dependencyCheck additionalArguments: '--scan . --format ALL --out ./ --prettyPrint --disableYarnAudit', odcInstallation: 'dependency-check'
                         dependencyCheckPublisher failedTotalCritical: 50, pattern: 'dependency-check-report.xml', skipNoReportFiles: true, stopBuild: true
 
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: './', reportFiles: 'dependency-check-report.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+
+                        junit allowEmptyResults: true, keepProperties: true, keepTestNames: true, skipMarkingBuildUnstable: true, testResults: 'dependency-check-junit.xml'
                     }
                 }
             }
