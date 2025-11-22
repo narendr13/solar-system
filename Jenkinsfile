@@ -17,11 +17,12 @@ pipeline{
     }
     parameters {
         string defaultValue: 'king ', description: 'for testing ', name: 'test'
+        choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: 'Choose environment')
     }
     stages {
         stage ('params display'){
             steps {
-                echo "the parameter is ${params.test}"
+                echo "the parameter is ${params.ENV}"
             }
         }
         stage ('install dependencies'){
