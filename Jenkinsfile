@@ -75,5 +75,12 @@ pipeline{
                 sh 'trivy image --format json --output trivy-report.json naren818/my-image:$GIT_COMMIT'
             }
         }
+        stage('push docker image to hub'){
+            steps{
+                withDockerRegistry(credentialsId: 'dockerhub-cred') {
+                    sh 'docker push naren818/my-image:$GIT_COMMIT'
+                }
+            }
+        }
     }
 }
