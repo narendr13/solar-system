@@ -9,7 +9,21 @@ pipeline{
         MONGO_PSWD = credentials('DB_PSWD')
     }
 
+    options {
+        disableConcurrentBuilds()
+        retry(conditions: [agent()], count: 3)
+        disableRestartFromStage()
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '1', numToKeepStr: '5')
+    }
+    parameters {
+        string defaultValue: 'king ', description: 'for testing ', name: 'test'
+    }
     stages {
+        stage ('params display'){
+            steps {
+                echo "the parameter is ${params.test}"
+            }
+        }
         stage ('install dependencies'){
             steps {
                 sh 'npm install'
