@@ -39,6 +39,7 @@ pipeline{
             steps{
                 sh 'echo "Mocha exit code: $?"'
                 sh 'npm test || true'
+                junit allowEmptyResults: true, keepProperties: true, keepTestNames: true, skipMarkingBuildUnstable: true, skipOldReports: true, testResults: 'test-results.xml'
             }
         }
         stage('code coverage'){
