@@ -70,7 +70,7 @@ pipeline{
                 sh 'docker build -t naren818/my-image:$GIT_COMMIT .'
             }
         }
-        stage('scan docker image using trivy'){
+        stage('scan docker image using trivyy'){
             steps{
                 sh 'trivy image --format json --output trivy-report.json naren818/my-image:$GIT_COMMIT'
             }
