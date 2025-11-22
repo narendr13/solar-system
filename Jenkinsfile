@@ -77,7 +77,7 @@ pipeline{
         }
         stage('push docker image to hub'){
             steps{
-                withDockerRegistry(credentialsId: 'dockerhub-cred') {
+                withDockerRegistry(credentialsId: 'dockerhub-cred', url: 'https://index.docker.io/v1/') {
                     sh 'docker push naren818/my-image:$GIT_COMMIT'
                 }
             }
