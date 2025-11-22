@@ -67,7 +67,7 @@ pipeline{
         }
         stage('build docker image'){
             steps{
-                sh 'docker build -t naren818/my-image:v12 .'
+                sh 'sudo docker build -t naren818/my-image:v12 .'
             }
         }
     }
