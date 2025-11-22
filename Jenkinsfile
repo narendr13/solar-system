@@ -2,6 +2,7 @@ pipeline{
     agent any
     tools {
         nodejs 'nodejs-25-1-0'
+        docker 'docker-latest'
     }
     environment {
         MONGO_URI = "mongodb://172.31.76.116:27017/solar-system"
