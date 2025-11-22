@@ -65,5 +65,10 @@ pipeline{
                 publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'coverage/lcov-report', reportFiles: 'index.html', reportName: 'Coverage HTML Report', reportTitles: '', useWrapperFileDirectly: true])
             }
         }
+        stage('build docker image'){
+            steps{
+                sh 'docker build -t naren818/my-image:v12 .'
+            }
+        }
     }
 }
