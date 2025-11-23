@@ -94,9 +94,9 @@ pipeline{
                                     echo "container has been stopped and removed"
                                 fi
                                 sudo docker run --name solar-system \
-                                    -e MONGO_URI = $MONGO_URI \
-                                    -e MONGO_USER = $MONGO_USER \
-                                    -e MONGO_PSWD - $MONGO_PSWD \
+                                    -e MONGO_URI=$MONGO_URI \
+                                    -e MONGO_USER=$MONGO_USER \
+                                    -e MONGO_PSWD=$MONGO_PSWD \
                                     -p 3000:3000 -d naren818/my-image:$GIT_COMMIT
                             "
                         '''
