@@ -86,22 +86,21 @@ pipeline{
             steps{
                 script {
                     sshagent(['sshagent-creds']) {
-                        withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'dockerHub-pswd', usernameVariable: 'dockerHub-username')]) {
-                            sh '''
-                                ssh -o StrictHostKeyChecking=no ubuntu@98.93.176.139 "
-                                    if sudo docker ps -a| grep -q "solar-system"; then
-                                        echo "found the container and stopping it"
-                                            sudo docker stop "solar-system" && sudo docker rm "solar-system"
-                                        echo "container has been stopped and removed"
-                                    fi
-                                    sudo docker run --name solar-system \
-                                        -e MONGO_URI=$MONGO_URI \
-                                        -e MONGO_USER=$MONGO_USER \
-                                        -e MONGO_PSWD=$MONGO_PSWD \
-                                        -p 3000:3000 -d naren818/my-image:$GIT_COMMIT
-                                "
-                            '''
-                        }   
+                        sh '''
+                            ssh -o StrictHostKeyChecking=no ubuntu@98.93.176.139 "
+                                if sudo docker ps -a| grep -q "solar-system"; then
+                                    echo "found the container and stopping it"
+                                        sudo docker stop "solar-system" && sudo docker rm "solar-system"
+                                    echo "container has been stopped and removed"
+                                fi
+                                sudo docker run --name solar-system \
+                                    -e MONGO_URI=$MONGO_URI \
+                                    -e MONGO_USER=$MONGO_USER \
+                                    -e MONGO_PSWD=$MONGO_PSWD \
+                                    -p 3000:3000 -d naren818/my-image:$GIT_COMMIT
+                            "
+                        '''
+  
                     }
                 } 
             }
