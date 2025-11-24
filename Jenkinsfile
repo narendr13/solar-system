@@ -45,6 +45,8 @@ pipeline{
                         publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: './', reportFiles: 'dependency-check-report.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
 
                         junit allowEmptyResults: true, keepProperties: true, keepTestNames: true, skipMarkingBuildUnstable: true, testResults: 'dependency-check-junit.xml'
+
+                        archiveArtifacts allowEmptyArchive: true, artifacts: 'dependency-check-report.html', followSymlinks: false
                     }
                 }
             }
